@@ -1,6 +1,9 @@
-
+/**
+ * Get color for the value
+ * @param  {char}   value   range: -2 to 9
+ * @return {string}         retun color
+ */
 function getcolor(value){
-    //Return color based on the color value in the resistor table
     var color = {'-2': "silver",
             '-1': "gold",
             '0': "black",
@@ -16,6 +19,12 @@ function getcolor(value){
     return color[value];
 }
 
+/**
+ * Return color for tolerance value
+ * @param  {integer} tol tolerance value
+ * @return {string}     return color or -1 if
+ *                      it doesn't exist
+ */
 function tolcolor(tol){
     //Return Color for tolarance value
     var val = parseInt(tol * 100,10);
@@ -40,12 +49,19 @@ function tolcolor(tol){
     return '-1';
 }
 
+/**
+ * Return the color bands
+ * @param  {String}     valuestr resistor value
+ * @param  {double}     tol      tolerance value
+ * @param  {interger}   mul      multiplier([0,3,6])
+ * @return {Dict object}         band color
+ */
 exports.valuetocolor = function (valuestr, tol, mul){
 
     if(typeof tol === "undefined") {tol = 5;}
     if(typeof mul === "undefined") {mul = null;}
     digit = [0, 0, 0];
-    dec = 0;
+    dec = -1;
     noofdigit = parseInt(tol,10) > 2 ? 0 : 1;
     i = 0;
     dot_mul_re = /^[0-9]*\.[0-9]+[kKmMrR]$/;
@@ -68,29 +84,32 @@ exports.valuetocolor = function (valuestr, tol, mul){
                 digit[i] = parseInt(valuestr[j], 10);
             i++;
         }else if(mul === null){
+            dec = i;
             switch(valuestr[j]){
                 case 'r':
                 case 'R':
                 case '.':
                     mul = 0;
-                    dec = i;
                     break;
                 case 'k':
                 case 'K':
                     mul = 3;
-                    dec = i;
                     break;
                 case 'm':
                 case 'M':
                     mul = 6;
-                    dec = i;
                     break;
             }
         }
     }
 
-    mul = mul === null ? i : mul;
-    multiplier = mul + dec - noofdigit - 2;
+    if (dec == -1){
+        dec = i;
+        if(mul === null){
+            mul = 0;
+        }
+    }
+    multiplier = parseInt(mul,10) + dec - noofdigit - 2;
     multiplier = multiplier == -3 ? -2 : multiplier;
 
     if (noofdigit === 0)
@@ -108,4 +127,4 @@ exports.valuetocolor = function (valuestr, tol, mul){
                 "band5": tolcolor(tol)
                 };
     return ret;
-}
+};
