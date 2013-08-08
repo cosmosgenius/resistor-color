@@ -58,8 +58,9 @@ function tolcolor(tol){
  */
 exports.valuetocolor = function (valuestr, tol, mul){
 
-    if(typeof tol === "undefined") {tol = 5;}
-    if(typeof mul === "undefined") {mul = null;}
+    tol = tol || 5;
+    mul = mul || null;
+    
     digit = [0, 0, 0];
     dec = -1;
     noofdigit = parseInt(tol,10) > 2 ? 0 : 1;
