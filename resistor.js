@@ -64,7 +64,7 @@
         resistor_value = String(resistor_value).replace(/^0*/,'');
         tol = tol || 5;
         mul = mul || null;
-        
+        var resistor_value_array = resistor_value.split(/[.kKmMrR]/);
         digit = [0, 0, 0];
         dec = -1;
         noofdigit = parseInt(tol,10) > 2 ? 0 : 1;
