@@ -41,9 +41,8 @@
             '1000':'silver',
             '2000':''
         };
-        var val = parseInt(tol * 100,10);
-
-        if(tolerance_color[val]){
+        var val = (+tol) * 100;
+        if(val in tolerance_color){
             return tolerance_color[val];
         }
         return '-1';
@@ -57,80 +56,56 @@
      * @return {Dict object}         band color
      */
     exports.getColor = function (resistor_value, tol, mul){
+        var digit = [0, 0, 0];
+        var digits = [];
+        var dec = -1;
+        var mul = {
+            value:'',
+            pos:''
+        };
+        var multiplier;
         if (!resistor_value){
-            console.error("resistor: input parameter is " + resistor_value);
+            console.error("resistor: invalid parameter");
             return;
         }
         resistor_value = String(resistor_value).replace(/^0*/,'');
         tol = tol || 5;
         mul = mul || null;
-        var resistor_value_array = resistor_value.split(/[.kKmMrR]/);
-        digit = [0, 0, 0];
-        dec = -1;
-        noofdigit = parseInt(tol,10) > 2 ? 0 : 1;
-        i = 0;
-        dot_mul_re = /^[0-9]*\.[0-9]+[kKmMrR]$/;
-        mul_re = /^[0-9]*[kKmMrR][0-9]+$/;
-
-        if (dot_mul_re.test(resistor_value)){
-            mul_char = resistor_value[resistor_value.length - 1];
-            resistor_value = resistor_value.replace(mul_char, '');
-            resistor_value = resistor_value.replace('.', mul_char);
+        significant_digit = tol > 2 ? 2 : 3;
+        if(/[kK]/.test(resistor_value)){
+            mul['value'] = 100000;
+        }else if(/[mM]/.test(resistor_value)){
+            mul['value'] = 100000000;
+        }else{
+            mul['value'] = 100;
         }
-
-        if (mul_re.test(resistor_value))
-            mul = null;
-
-        resistor_value = resistor_value.match(/[1-9]+.*$/)[0];
-
-        for(var j = 0; j < resistor_value.length; ++j){
-            if (resistor_value[j].match(/[0-9]/) !== null){
-                if(i < 3)
-                    digit[i] = parseInt(resistor_value[j], 10);
-                i++;
-            }else if(mul === null){
-                dec = i;
-                switch(resistor_value[j]){
-                    case 'r':
-                    case 'R':
-                    case '.':
-                        mul = 0;
-                        break;
-                    case 'k':
-                    case 'K':
-                        mul = 3;
-                        break;
-                    case 'm':
-                    case 'M':
-                        mul = 6;
-                        break;
-                }
-            }
+        if(/[.]/.test(resistor_value)){
+            resistor_value = resistor_value.replace(/[rRkKmM]/,'');
+        }else{
+            resistor_value = resistor_value.replace(/[rRkKmM]/,'.');
         }
-
-        if (dec == -1){
-            dec = i;
-            if(mul === null){
-                mul = 0;
-            }
+        resistor_value = ""+(+resistor_value * mul['value']);
+        for (var i = 0 ; i< significant_digit ; i++){
+            digits.push(resistor_value[i]?resistor_value[i]:0);
         }
-        multiplier = parseInt(mul,10) + dec - noofdigit - 2;
-        multiplier = multiplier == -3 ? -2 : multiplier;
-
-        if (noofdigit === 0)
-            ret = {"band1": getcolor(digit[0]),
-                    "band2": getcolor(digit[1]),
-                    "band3": getcolor(multiplier),
-                    "band4": "",
-                    "band5": getToleranceColor(tol)
-                    };
-        else
-            ret = {"band1": getcolor(digit[0]),
-                    "band2": getcolor(digit[1]),
-                    "band3": getcolor(digit[2]),
-                    "band4": getcolor(multiplier),
-                    "band5": getToleranceColor(tol)
-                    };
+        multiplier = resistor_value.length - significant_digit - 2;
+        if(significant_digit == 2){
+            var ret = {
+                'band1':getcolor(digits[0]),
+                'band2':getcolor(digits[1]),
+                'band3':getcolor(multiplier),
+                'band4':'',
+                'band5':getToleranceColor(tol)
+            };
+        }else{
+            var ret = {
+                'band1':getcolor(digits[0]),
+                'band2':getcolor(digits[1]),
+                'band3':getcolor(digits[2]),
+                'band4':getcolor(multiplier),
+                'band5':getToleranceColor(tol)
+            };
+        }
         return ret;
     };
 
