@@ -65,7 +65,7 @@
         };
         var multiplier;
         if (!resistor_value){
-            console.error("resistor: invalid parameter");
+            throw ("resistor: invalid parameter");
             return;
         }
         resistor_value = String(resistor_value).replace(/^0*/,'');
