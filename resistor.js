@@ -71,7 +71,7 @@
         resistor_value = String(resistor_value).replace(/^0*/,'');
         tol = tol || 5;
         mul = mul || null;
-        significant_digit = tol > 2 ? 2 : 3;
+        var significant_digit = tol > 2 ? 2 : 3;
         if(/[kK]/.test(resistor_value)){
             mul['value'] = 100000;
         }else if(/[mM]/.test(resistor_value)){
@@ -84,7 +84,7 @@
         }else{
             resistor_value = resistor_value.replace(/[rRkKmM]/,'.');
         }
-        resistor_value = ""+(+resistor_value * mul['value']);
+        resistor_value = (""+ +(+resistor_value * mul['value']).toFixed(4));
         for (var i = 0 ; i< significant_digit ; i++){
             digits.push(resistor_value[i]?resistor_value[i]:0);
         }
