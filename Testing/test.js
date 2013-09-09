@@ -1,6 +1,6 @@
 test("resistor: Test For Object",function(){
     ok(resistor,"Check for resistor");
-    ok(resistor.getColor,"Check for getColor");
+    ok(resistor.resistorToColor,"Check for getColor");
 });
 
 function match(param,colors,title){
@@ -11,11 +11,11 @@ function match(param,colors,title){
         'band4':colors[3] || "",
         'band5':colors[4] || ""
     };
-    var actual = resistor.getColor(param[0],param[1]||5,param[2]);     
+    var actual = resistor.resistorToColor(param[0],param[1]||5,param[2]);
     deepEqual(actual,obj,title);
 }
 
-test("resistor: Test for tolerance 20",function(){    
+test("resistor: Test for tolerance 20",function(){
     match([1,20],["brown","black","gold"],"Value 1");
     match([9,20],["white","black","gold"],"Value 9");
 
