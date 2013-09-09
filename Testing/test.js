@@ -91,7 +91,7 @@ test("Resistor: k mul tol 20",function(){
     match(['1.999k',20],["brown","white","red"],"Value 1.999k");
 
     match(['1.9999k',20],["brown","white","red"],"Value 1.9999k");
-})
+});
 
 test("Resistor: M mul tol 20",function(){
    
@@ -131,10 +131,10 @@ test("Resistor: M mul tol 20",function(){
     match(['1.999m',20],["brown","white","green"],"Value 1.999m");
 
     match(['1.9999m',20],["brown","white","green"],"Value 1.9999m");
-})
+});
 
 test("Resistor:Error",function(){
     throws(function(){
         resistor.getColor(0);
-    },/resistor: invalid parameter/,"Raise Error contains invalid")
+    },/resistor: invalid parameter/,"Raise Error contains invalid");
 });
