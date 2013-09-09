@@ -11,7 +11,7 @@ function match(param,colors,title){
         'band4':colors[3] || "",
         'band5':colors[4] || ""
     };
-    var actual = resistor.resistorToColor(param[0],param[1]||5,param[2]);
+    var actual = resistor.resistorToColor(param[0],param[1]||5);
     deepEqual(actual,obj,title);
 }
 
@@ -135,6 +135,6 @@ test("Resistor: M mul tol 20",function(){
 
 test("Resistor:Error",function(){
     throws(function(){
-        resistor.getColor(0);
+        resistor.resistorToColor(0);
     },/resistor: invalid parameter/,"Raise Error contains invalid");
 });
