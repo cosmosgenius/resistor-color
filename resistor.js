@@ -1,9 +1,8 @@
 (function (exports){
-
     /**
-     * Get color for the value
-     * @param  {char}   value   range: -2 to 9
-     * @return {string}         retun color
+     * Returns the color for a resistor band value
+     * @param  {string} value resistor band value between -2 to 9
+     * @return {string}       color corresponding to that value
      */
     function getcolor(value){
         var color = {'-2': "silver",
@@ -22,14 +21,11 @@
     }
 
     /**
-     * Return color for tolerance value
-     * @param  {integer} tol tolerance value
-     * @return {string}     return color or -1 if
-     *                      it doesn't exist
+     * Returns the color corresponding to the tolerance value
+     * @param  {string} tol tolerance
+     * @return {string}     color corresponding to the tolerance value
      */
     function getToleranceColor(tol){
-        //Return Color for tolarance value
-        
         var tolerance_color={
             '5':'gray',
             '10':'violet',
@@ -55,18 +51,17 @@
      * @param  {interger}   mul      multiplier([0,3,6])
      * @return {Dict object}         band color
      */
-    exports.getColor = function (resistor_value, tol, mul){
-        var digit = [0, 0, 0];
-        var digits = [];
-        var dec = -1;
-        var mul = {
-            value:'',
-            pos:''
-        };
-        var multiplier;
+    exports.resistorToColor = function (resistor_value, tol, mul){
+        var digit = [0, 0, 0],
+            digits = [],
+            dec = -1,
+            mul = {
+                value:'',
+                pos:''
+            },
+            multiplier;
         if (!resistor_value){
             throw ("resistor: invalid parameter");
-            return;
         }
         resistor_value = String(resistor_value).replace(/^0*/,'');
         tol = tol || 5;
@@ -90,23 +85,21 @@
         }
         multiplier = resistor_value.length - significant_digit - 2;
         if(significant_digit == 2){
-            var ret = {
+            return {
                 'band1':getcolor(digits[0]),
                 'band2':getcolor(digits[1]),
                 'band3':getcolor(multiplier),
                 'band4':'',
                 'band5':getToleranceColor(tol)
             };
-        }else{
-            var ret = {
-                'band1':getcolor(digits[0]),
-                'band2':getcolor(digits[1]),
-                'band3':getcolor(digits[2]),
-                'band4':getcolor(multiplier),
-                'band5':getToleranceColor(tol)
-            };
         }
-        return ret;
+        return {
+            'band1':getcolor(digits[0]),
+            'band2':getcolor(digits[1]),
+            'band3':getcolor(digits[2]),
+            'band4':getcolor(multiplier),
+            'band5':getToleranceColor(tol)
+        };
     };
 
 })(typeof exports === "undefined" ?this['resistor'] = {}:exports);
