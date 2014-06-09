@@ -1,22 +1,23 @@
 (function (exports){
+    'use strict';
     /**
      * Returns the color for a resistor band value
      * @param  {string} value resistor band value between -2 to 9
      * @return {string}       color corresponding to that value
      */
     function getcolor(value){
-        var color = {'-2': "silver",
-                '-1': "gold",
-                '0': "black",
-                '1': "brown",
-                '2': "red",
-                '3': "orange",
-                '4': "yellow",
-                '5': "green",
-                '6': "blue",
-                '7': "violet",
-                '8': "grey",
-                '9': "white"};
+        var color = {'-2': 'silver',
+                '-1': 'gold',
+                '0': 'black',
+                '1': 'brown',
+                '2': 'red',
+                '3': 'orange',
+                '4': 'yellow',
+                '5': 'green',
+                '6': 'blue',
+                '7': 'violet',
+                '8': 'grey',
+                '9': 'white'};
         return color[value];
     }
 
@@ -59,9 +60,9 @@
         }
 
         //replace '.' is exist with replace_char
-        if(value.indexOf(".")!== -1){
+        if(value.indexOf('.')!== -1){
             value = value.replace(replace_char[0], '');
-            value = value.replace(".",replace_char[0]);
+            value = value.replace('.',replace_char[0]);
         }
 
         return value;
@@ -94,7 +95,7 @@
 
         //check if resistor value exist or not...    
         if (!resistor_value){
-            throw ("resistor: invalid parameter");
+            throw ('resistor: invalid parameter');
         }
         
         //preprocess the value
@@ -103,11 +104,11 @@
         //setting the multiplier value k=1000*100, m=100000*100, and default=100
         //extra 100 is used to get accuracy when doing float division and multiplication
         if(/[kK]/.test(resistor_value)){
-            mul['value'] = 100000;
+            mul.value = 100000;
         }else if(/[mM]/.test(resistor_value)){
-            mul['value'] = 100000000;
+            mul.value = 100000000;
         }else{
-            mul['value'] = 100;
+            mul.value = 100;
         }
 
         //remove multiplier character and replace by . if not present.
@@ -116,14 +117,14 @@
         //convert resistor_value to float by unioperator +
         //round of to precision 4 to remove float point bug eg try (1.16 * 100)
         //remove trailing zeros
-        //finally convert to string by ""+
-        resistor_value = (""+ +(+resistor_value * mul['value']).toFixed(4));
+        //finally convert to string by ''+
+        resistor_value = (''+ +(+resistor_value * mul.value).toFixed(4));
 
         for (var i = 0 ; i< significant_digit ; i++){
             digits.push(resistor_value[i]?resistor_value[i]:0);
         }
         multiplier = resistor_value.length - significant_digit - 2;
-        if(significant_digit == 2){
+        if(significant_digit === 2){
             return {
                 'band1':getcolor(digits[0]),
                 'band2':getcolor(digits[1]),
@@ -141,4 +142,4 @@
         };
     };
 
-})(typeof exports === "undefined" ?this['resistor'] = {}:exports);
+})(typeof exports === 'undefined' ? this.resistor = {}:exports);
