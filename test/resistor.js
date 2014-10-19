@@ -1,21 +1,18 @@
 /*global describe, it*/
-"use strict";
+'use strict';
+var should = require('should');
 
-var resistorColor = require("../");
+var resistorColor = require('../');
 
-describe("Resistor color", function(){
-    describe("Encoder", function(){
-        it("first" ,function(done){
+describe('Resistor color', function(){
+
+    describe('resistorToColor', function(){
+
+        it('should exist' ,function(){
+            should.exist(resistorColor.resistorToColor);
             resistorColor.resistorToColor(1);
-            done();
         });
 
-        it("second" ,function(done){
-            done();
-        });
     });
-
-    describe("Decoder", function(){
-
-    });
+    
 });

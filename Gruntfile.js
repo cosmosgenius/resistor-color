@@ -40,8 +40,8 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            express: {
-                files: ['lib/**/*.js'],
+            test: {
+                files: ['lib/**/*.js','test/**/*.js'],
                 tasks: ['mochaTest']
             }
         }
@@ -52,6 +52,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-mocha-test');
 
     // Default task.
-    grunt.registerTask('default', ['test']);
+    grunt.registerTask('default', ['mochaTest','watch']);
     grunt.registerTask('test', ['mochaTest']);
 };
