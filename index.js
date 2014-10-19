@@ -1,1 +1,1 @@
-module.exports = require('./lib/resistor');
+module.exports = require('./lib/resistor-color');
