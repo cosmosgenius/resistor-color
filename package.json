@@ -1,0 +1,39 @@
+{
+  "name": "resistor-color",
+  "version": "0.0.0",
+  "description": "A library to decode and encode resistor color values",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cosmosgenius/resistor-color.git"
+  },
+  "keywords": [
+    "resistor",
+    "color",
+    "decode",
+    "encode"
+  ],
+  "author": "Sharat M R <cosmosgenius@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cosmosgenius/resistor-color/issues"
+  },
+  "homepage": "https://github.com/cosmosgenius/resistor-color",
+  "devDependencies": {
+    "blanket": "*",
+    "grunt": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-mocha-test": "*",
+    "mocha-lcov-reporter": "*",
+    "should": "*",
+    "travis-cov": "*"
+  },
+  "config": {
+    "travis-cov": {
+      "threshold": 70
+    }
+  }
+}
