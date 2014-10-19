@@ -1,1 +1,22 @@
-index.html
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+pids
+logs
+results
+
+npm-debug.log
+node_modules
+
+#to prevent production server configs to be added
+config/production.*
+coverage/cov
+lcov.info
+
+coverage.*
