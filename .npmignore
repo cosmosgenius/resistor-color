@@ -1,0 +1,8 @@
+.travis.yml
+.gitattributes
+coverage
+coverage.html
+lcov.info
+Gruntfile.js
+test
+Testing
