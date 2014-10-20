@@ -1,7 +1,7 @@
 resistor-color
 ==========
 
-A javascript lib for finding the resistor color code
+A javascript lib for finding the resistor color code (accepts BS_1852 notation)
 
 [![NPM version][npm-image]][npm-url]
 [![Build status][travis-image]][travis-url]
