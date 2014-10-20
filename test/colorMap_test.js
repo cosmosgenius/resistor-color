@@ -35,7 +35,7 @@ function randomizeCharCase(value){
 
 describe('Color Map', function(){
     describe('function digitColor', function(){
-        it('should return color corresponding to its value', function(){
+        it('should return color corresponding to the digit', function(){
             for (var i = -2 ; i < 10 ; i++) {
                 colorToValueMap[color.digitColor(i)].should.equal(i);
             }
@@ -45,7 +45,7 @@ describe('Color Map', function(){
     });
 
     describe('function digitValue', function(){
-        it('should return color corresponding to its value', function(){
+        it('should return value corresponding to the color', function(){
             for (var x in colorToValueMap){
                 var value = color.digitValue(randomizeCharCase(x));
                 should.exist(value);
@@ -57,7 +57,7 @@ describe('Color Map', function(){
     });
 
     describe('function toleranceColor', function(){
-        it('should return color corresponding to its value', function(){
+        it('should return color corresponding to the tolerance percentage', function(){
             color.toleranceColor(0.1).should.be.equal('violet');
             color.toleranceColor(0.25).should.be.equal('blue');
             color.toleranceColor(0.5).should.be.equal('green');
@@ -72,7 +72,7 @@ describe('Color Map', function(){
     });
 
     describe('function toleranceValue', function(){
-        it('should return color corresponding to its value', function(){
+        it('should return tolerance percentage corresponding to the color', function(){
             color.toleranceValue(randomizeCharCase('violet')).should.be.equal(0.1);
             color.toleranceValue(randomizeCharCase('blue')).should.be.equal(0.25);
             color.toleranceValue('green').should.be.equal(0.5);
@@ -87,7 +87,7 @@ describe('Color Map', function(){
     });
 
     describe('function multiplierColor', function(){
-        it('should return color corresponding to its value', function(){
+        it('should return color corresponding to the multiple value', function(){
             for (var i = -2 ; i < 10 ; i++) {
                 colorToValueMap[color.multiplierColor(Math.pow(10,i))].should.equal(i);
             }
@@ -100,7 +100,7 @@ describe('Color Map', function(){
     });
 
     describe('function multiplierValue', function(){
-        it('should return color corresponding to its value', function(){
+        it('should return multiplier value corresponding to the color', function(){
             for (var x in colorToValueMap){
                 var value = color.multiplierValue(randomizeCharCase(x));
                 should.exist(value);
