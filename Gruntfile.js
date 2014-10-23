@@ -39,12 +39,6 @@ module.exports = function(grunt) {
                 src: ['test/**/*.js']
             }
         },
-        release : {
-            options : {
-                npm: false, //default: true
-                npmtag: false, //default: no tag
-            }
-        },
         watch: {
             test: {
                 files: ['lib/**/*.js','test/**/*.js'],
@@ -56,7 +50,6 @@ module.exports = function(grunt) {
     // These plugins provide necessary tasks.
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-mocha-test');
-    grunt.loadNpmTasks('grunt-release');
 
     // Default task.
     grunt.registerTask('default', ['mochaTest','watch']);
