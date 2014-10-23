@@ -27,7 +27,6 @@
     "grunt": "*",
     "grunt-contrib-watch": "*",
     "grunt-mocha-test": "*",
-    "grunt-release": "^0.7.0",
     "mocha-lcov-reporter": "*",
     "should": "*",
     "travis-cov": "*"
