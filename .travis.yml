@@ -4,3 +4,12 @@ node_js:
 before_install: npm install -g grunt-cli
 install: npm install
 after_script: npm install coveralls && cat ./lcov.info | coveralls
+deploy:
+  provider: npm
+  email: cosmosgenius@gmail.com
+  api_key:
+    secure: fndMD7ueYTprVcRcGAz1XliZAypgn3S4Jeq/GtlW6BFm+a4iLZzbcj7f2OOaBlC33MvwCZIXn8t0hOAPqNaNbMEz4Xj470J03D9mSLZNsaMX5kwp15AH+KlnfZmIGzb5znSxWXpjIOpK+xz4K31nCwsHMiKMIYJ4+wh/q4mE6VY=
+  on:
+    tags: true
+    repo: cosmosgenius/resistor-color
+    all_branches: true
