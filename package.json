@@ -1,6 +1,6 @@
 {
   "name": "resistor-color",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A library to decode and encode resistor color values",
   "main": "index.js",
   "scripts": {
@@ -27,6 +27,7 @@
     "grunt": "*",
     "grunt-contrib-watch": "*",
     "grunt-mocha-test": "*",
+    "grunt-release": "^0.7.0",
     "mocha-lcov-reporter": "*",
     "should": "*",
     "travis-cov": "*"
