@@ -1,6 +1,8 @@
 resistor-color
 ==========
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/cosmosgenius/resistor-color.svg)](https://greenkeeper.io/)
+
 A javascript lib for finding the resistor color code (accepts BS_1852 notation)
 
 [![NPM version][npm-image]][npm-url]
